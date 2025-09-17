@@ -1,0 +1,52 @@
+# node
+node_modules/
+**/node_modules/
+
+# build
+dist/
+build/
+.cache/
+.next/
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# env
+.env
+.env.*
+server/.env
+client/.env
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# ide
+.vscode/
+.idea/
+*.swp
+
+# Vite build cache
+client/.vite/
+client/.cache/
+
+# Local dev server output
+client/.eslintcache
+
+# Debug & coverage
+server/coverage/
+server/debug.log
+
+# PM2 / process manager logs
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# lock
+package-lock.json
