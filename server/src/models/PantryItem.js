@@ -3,7 +3,7 @@ const PantryItemSchema = new Schema(
     {
         name: {type: String, required: true, index: true},
         qty: {type: Number, default: 1, min: 0},
-        unit: {type: String},
+        unit: {type: String}, // should this have a default?
         expire: {type: Date},
         notes: {type: String}
     },
