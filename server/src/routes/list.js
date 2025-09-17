@@ -1,28 +1,29 @@
 const express = require('express');
-const PantryItem = require('../models/PantryItem');
+const ListItem = require('../models/ListItem');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const items = (await PantryItem.find()).sort({createdAt: -1});
+    const items = (await ListItem.find()).sort({createdAt: -1});
     res.json(items);
-});
+})
 
-// CREATE pantry item
+// CREATE list item
 router.post('/', async (req, res) => {
     try {
-        const {name, qty = 1, unit, expire, notes} = req.body;
+        const {name, qty = 1, unit, notes} = req.body;
         if (!name) return res.status(400).json({error: 'name is required'});
-        const item = await PantryItem.create({name, qty, unit, expire, notes});
+        //TODO: add merge by name
+        const item = await ListItem.create({name, qty, unit, notes});
         res.status(201).json(item);
     } catch (e) {
         res.status(500).json({error: e.message});
     }
 });
 
-// UPDATE pantry item
+// UPDATE list item
 router.patch('/:id', async (req, res) => {
     try {
-        const item = await PantryItem.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const item = await ListItem.findByIdAndUpdate(req.params.id, req.body, {new: true});
         if (!item) return res.status(404).json({error: 'item not found'});
         res.json(item);
     } catch (e) {
@@ -30,12 +31,12 @@ router.patch('/:id', async (req, res) => {
     }
 });
 
-// DELETE pantry item
+// DELETE list item
 router.delete('/:id', async (req, res) => {
     try {
-        const item = await PantryItem.findByIdAndDelete(req.params.id);
+        const item = await ListItem.findByIdAndDelete(req.params.id);
         if (!item) return res.status(404).json({error: 'item not found'});
-        res.json({ok: true});
+        res.json({ok: true})
     } catch (e) {
         res.status(500).json({error: e.message});
     }
